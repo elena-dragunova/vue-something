@@ -1,0 +1,14 @@
+$light-color: #D3EDEB;
+$dark-color: #6FADA8;
+$accent-color: #FF4545;
+$text-color: #707070;
+
+body {
+  margin: 0;
+  padding: 0;
+  color: $text-color;
+}
+
+* {
+  box-sizing: border-box;
+}
