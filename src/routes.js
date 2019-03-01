@@ -23,6 +23,7 @@ export default new VueRouter ({
       path: '/contacts',
       component: Contacts
     },
+
   ],
   mode: 'history'
 })

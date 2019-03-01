@@ -23,9 +23,6 @@ module.exports = {
           loaders: {
           },
           // other vue-loader options go here
-          extractCSS: true,
-          scss: ["vue-style-loader", "css-loader", "sass-loader"],
-          postcss: [autoprefixer()]
 
         }
       },
