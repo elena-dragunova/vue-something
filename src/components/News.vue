@@ -82,10 +82,8 @@
   @import '../assets/global';
 
   .newsSection {
-    max-width: 100%;
-    width: 1200px;
-    margin: 0 auto;
     padding: 40px 0;
+    @extend %container;
     h2 {
       font-size: 40px;
       text-align: center;
@@ -96,5 +94,4 @@
     display: flex;
     flex-flow: row wrap;
   }
-
 </style>

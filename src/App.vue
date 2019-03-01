@@ -2,7 +2,9 @@
   <div id="app" :class="$style.app">
     <app-header />
     <main :class="$style.main">
-      <news />
+
+      <router-view />
+
     </main>
     <app-footer />
 
@@ -13,14 +15,13 @@
 
   import AppHeader from "./components/AppHeader";
   import AppFooter from "./components/AppFooter";
-  import News from "./components/News";
+
 
   export default {
     name: 'app',
     components: {
       AppHeader,
       AppFooter,
-      News
     },
     data () {
       return {

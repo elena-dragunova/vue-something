@@ -21,11 +21,11 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-          }
+          },
           // other vue-loader options go here
-          // extractCSS: true,
-          // scss: ["vue-style-loader", "css-loader", "sass-loader"],
-          // postcss: [autoprefixer()]
+          extractCSS: true,
+          scss: ["vue-style-loader", "css-loader", "sass-loader"],
+          postcss: [autoprefixer()]
 
         }
       },
