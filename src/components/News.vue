@@ -15,66 +15,29 @@
 
 <script>
     import NewsItem from './NewsItem';
+    import store from '../main';
+    import NewsService from '../NewsService';
 
     export default {
+        store,
         name: "News",
         components: {
           NewsItem
         },
-        methods: {
-            removeFromNews: function (id) {
-              this.news = this.news.filter(item => item.id !== id)
-            }
-        },
-        data: function () {
-          return {
-            news: [
-              {
-                id: 1,
-                title: "News Title",
-                date: "25.02.2019",
-                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam, at delectus enim excepturi facilis id impedit inventore libero maiores maxime molestiae quam quasi, quia saepe sunt tenetur totam veritatis?"
-              },
-              {
-                id: 2,
-                title: "News Long Long Title May Be In Two Lines And More",
-                date: "20.02.2019",
-                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam, at delectus enim excepturi facilis id impedit inventore libero maiores maxime molestiae quam quasi, quia saepe sunt tenetur totam veritatis?"
-              },
-              {
-                id: 3,
-                title: "News Long Title May Be In Two Lines",
-                date: "20.02.2019",
-                text: "Lorem ipsum dolor sit amet?"
-              },
-              {
-                id: 4,
-                title: "News Title",
-                date: "20.02.2019",
-                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam, at delectus enim excepturi facilis id impedit inventore libero maiores maxime molestiae quam quasi, quia saepe sunt tenetur totam veritatis?"
-              },
-              {
-                id: 5,
-                title: "News Title",
-                date: "20.02.2019",
-                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam, at delectus enim excepturi facilis id impedit inventore libero maiores maxime molestiae quam quasi, quia saepe sunt tenetur totam veritatis?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam, at delectus enim excepturi facilis id impedit inventore libero maiores maxime molestiae quam quasi, quia saepe sunt tenetur totam veritatis?"
-              },
-              {
-                id: 6,
-                title: "News Long Long Title May Be In Two Lines And More",
-                date: "20.02.2019",
-                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam, at delectus enim excepturi facilis id impedit inventore libero maiores maxime molestiae quam quasi, quia saepe sunt tenetur totam veritatis?"
-              },
-              {
-                id: 7,
-                title: "News Title",
-                date: "20.02.2019",
-                text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam, at delectus enim excepturi facilis id impedit inventore libero maiores maxime molestiae quam quasi, quia saepe sunt tenetur totam veritatis?"
-              }
-
-            ]
+        // methods: {
+        //     removeFromNews: function (id) {
+        //       this.news = this.news.filter(item => item.id !== id)
+        //     }
+        // },
+        computed: {
+          news() {
+            return this.$store.getters.getNews;
           }
+        },
+        created() {
+          this.$store.commit('loadNews', NewsService.news);
         }
+
     }
 </script>
 

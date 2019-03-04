@@ -33,6 +33,7 @@
 
 
 <style lang="scss" module>
+  @import '../main.css';
   @import './assets/global';
 
   .app {
