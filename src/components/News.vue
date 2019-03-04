@@ -29,6 +29,11 @@
         //       this.news = this.news.filter(item => item.id !== id)
         //     }
         // },
+        methods: {
+          removeFromNews: function (id) {
+            this.$store.commit('deleteNews', id);
+          }
+        },
         computed: {
           news() {
             return this.$store.getters.getNews;

@@ -12,6 +12,9 @@ export default new Vuex.Store({
   mutations: {
     loadNews(state, payload) {
       state.news = payload
+    },
+    deleteNews(state, id) {
+      state.news = state.news.filter(item => item.id !== id)
     }
   },
   actions: {
