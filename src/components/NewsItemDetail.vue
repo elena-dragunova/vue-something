@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.newsItemContainer">
     <h2>{{ currentNews.title }}</h2>
-    <p>{{ currentNews.text }}</p>
+    <p v-html="currentNews.text"></p>
     <p :class="$style.newsItemDate">{{ currentNews.date }}</p>
   </div>
 </template>

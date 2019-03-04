@@ -8,7 +8,10 @@
           :class="$style.newsLink"
         >{{ news.title }}</router-link>
         <p>{{ news.date }}</p>
-        <p>{{ news.text }}</p>
+        <p
+          v-truncate="150"
+          v-html="news.text"
+        ></p>
       </div>
 
 
@@ -35,7 +38,7 @@
         methods: {
           removeItem: function () {
             this.$emit("remove", this.news.id)
-          }
+          },
         }
     }
 </script>
@@ -60,6 +63,7 @@
       text-align: center;
       color: darken($dark-color, 25%);
       transition: all 0.25s ease-in-out;
+      height: 80px;
       &:hover {
         color: $dark-color;
         text-decoration: underline;
