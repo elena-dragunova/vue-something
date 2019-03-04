@@ -3,6 +3,7 @@ import Home from './components/Home'
 import About from './components/About'
 import News from './components/News'
 import Contacts from './components/Contacts'
+import NewsItemDetail from "./components/NewsItemDetail";
 
 
 export default new VueRouter ({
@@ -15,9 +16,14 @@ export default new VueRouter ({
       path: '/about',
       component: About
     },
+
     {
       path: '/news',
-      component: News
+      component: News,
+    },
+    {
+      path: '/news/:id',
+      component: NewsItemDetail
     },
     {
       path: '/contacts',
