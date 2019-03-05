@@ -5,8 +5,11 @@
 </template>
 
 <script>
+    // import { greetings } from '../main.js';
+
     export default {
-        name: "About"
+      name: "About",
+      // mixins: [ greetings ]
     }
 </script>
 
