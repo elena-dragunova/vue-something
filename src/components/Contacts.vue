@@ -10,14 +10,17 @@
         <input
           type="text"
           id="contactsName"
-          v-model="contactsName"
-          @blur="checkField(contactsName, $event.target)"
+          v-model.trim="$v.contactsName.$model"
         >
 
         <p
           :class="$style.error"
-          v-if="this.contactsErrors.indexOf('contactsName') > -1"
-        >Your name is required.</p>
+          v-if="$v.contactsName.$error && !$v.contactsName.required"
+        >Name is required.</p>
+        <p
+          :class="$style.error"
+          v-if="!$v.contactsName.minLength"
+        >Name must have at least {{ $v.contactsName.$params.minLength.min }} characters.</p>
       </div>
       <div :class="$style.inputField">
         <label for="contactsPhone">Phone</label>
@@ -33,13 +36,17 @@
           type="text"
           id="contactsEmail"
           v-model="contactsEmail"
-          @blur="checkField(contactsEmail, $event.target)"
+          @input="$v.contactsEmail.$touch()"
         >
 
         <p
           :class="$style.error"
-          v-if="this.contactsErrors.indexOf('contactsEmail') > -1"
-        >Your e-mail is required.</p>
+          v-if="$v.contactsEmail.$dirty && !$v.contactsEmail.required"
+        >Email is required.</p>
+        <p
+          :class="$style.error"
+          v-if="!$v.contactsEmail.email"
+        >Please, type valid email.</p>
       </div>
       <div :class="$style.inputField">
         <label for="contactsAddress">Address</label>
@@ -55,12 +62,12 @@
         <textarea
           id="contactsMessage"
           v-model="contactsMessage"
-          @blur="checkField(contactsMessage, $event.target)"
+          @input="$v.contactsMessage.$touch()"
         ></textarea>
 
         <p
           :class="$style.error"
-          v-if="this.contactsErrors.indexOf('contactsMessage') > -1"
+          v-if="$v.contactsMessage.$dirty && !$v.contactsMessage.required"
         >Please, type your message.</p>
       </div>
 
@@ -69,52 +76,52 @@
           type="checkbox"
           id="contactsAgreement"
           v-model="contactsAgreement"
-          @change="checkField(contactsAgreement, $event.target)"
+          @change="$v.contactsAgreement.$touch()"
         >
         <label for="contactsAgreement">I agree with something<span :class="$style.required">*</span></label>
 
         <p
           :class="$style.error"
-          v-if="this.contactsErrors.indexOf('contactsAgreement') > -1"
-        >We need your agreement to continue.</p>
+          v-if="$v.contactsAgreement.$dirty && $v.contactsAgreement.$model === false"
+        >You should agree with something.</p>
       </div>
 
-      <button :class="[$style.submitBtn, {[$style.errors]: hasErrors}]">Send</button>
+      <!-- TODO Add a normal custom validator -->
+      <button :class="[$style.submitBtn, {[$style.errors]: $v.$invalid || this.contactsAgreement === false}]">Send</button>
 
     </form>
   </section>
 </template>
 
 <script>
+    import { required, minLength, email } from 'vuelidate/lib/validators';
+
     export default {
       name: "Contacts",
       data: function () {
         return {
-          contactsErrors: [],
-          contactsName: null,
-          contactsPhone: null,
-          contactsEmail: null,
-          contactsAddress: null,
-          contactsMessage: null,
+          contactsName: "",
+          contactsPhone: "",
+          contactsEmail: "",
+          contactsAddress: "",
+          contactsMessage: "",
           contactsAgreement: false
         }
       },
-      methods: {
-        // Think how to avoid of e.id!!! Important!
-        checkField(name, e) {
-          if (!name) {
-            this.contactsErrors.push(e.id);
-          } else {
-            this.contactsErrors = this.contactsErrors.filter(item => item !== e.id);
-          }
-        }
-      },
-      computed: {
-        // Button should be not-active when the required fields are untouched and empty too!
-        hasErrors() {
-          if (this.contactsErrors.length > 0) {
-            return true;
-          }
+      validations: {
+        contactsName: {
+          required,
+          minLength: minLength(2)
+        },
+        contactsEmail: {
+          required,
+          email
+        },
+        contactsMessage: {
+          required
+        },
+        contactsAgreement: {
+          // TODO: create a custom validator
         }
       }
     }
