@@ -4,10 +4,12 @@
     <form
       :class="$style.contactsForm"
       id="contactsForm"
+      @submit.prevent="submitForm"
     >
       <div :class="$style.inputField">
         <label for="contactsName">Name <span :class="$style.required">*</span></label>
         <input
+          :class="{[$style.error]: $v.contactsName.$error }"
           type="text"
           id="contactsName"
           v-model.trim="$v.contactsName.$model"
@@ -34,6 +36,7 @@
         <label for="contactsEmail">E-mail<span :class="$style.required">*</span></label>
         <input
           type="text"
+          :class="{[$style.error]: $v.contactsEmail.$error }"
           id="contactsEmail"
           v-model="contactsEmail"
           @input="$v.contactsEmail.$touch()"
@@ -60,6 +63,7 @@
       <div :class="$style.textField">
         <label for="contactsMessage">Your message<span :class="$style.required">*</span></label>
         <textarea
+          :class="{[$style.error]: $v.contactsMessage.$error }"
           id="contactsMessage"
           v-model="contactsMessage"
           @input="$v.contactsMessage.$touch()"
@@ -72,13 +76,18 @@
       </div>
 
       <div :class="$style.checkboxField">
-        <input
-          type="checkbox"
-          id="contactsAgreement"
-          v-model="contactsAgreement"
-          @change="$v.contactsAgreement.$touch()"
-        >
-        <label for="contactsAgreement">I agree with something<span :class="$style.required">*</span></label>
+        <label for="contactsAgreement">I agree with something<span :class="$style.required">*</span>
+          <input
+            :class="[$style.checkbox, {[$style.error]: $v.contactsAgreement.$error }]"
+            type="checkbox"
+            id="contactsAgreement"
+            v-model="contactsAgreement"
+            @change="$v.contactsAgreement.$touch()"
+          >
+          <span :class="$style.checkmark"></span>
+        </label>
+
+
 
         <p
           :class="$style.error"
@@ -86,7 +95,7 @@
         >You should agree with something.</p>
       </div>
 
-      <button :class="[$style.submitBtn, {[$style.errors]: $v.$invalid }]">Send</button>
+      <button :class="[$style.submitBtn, {[$style.errors]: $v.$invalid }]" type="submit">Send</button>
 
     </form>
   </section>
@@ -125,6 +134,11 @@
           }
         }
 
+      },
+      methods: {
+        submitForm() {
+          console.log("Form is sent");
+        }
       }
     }
 </script>
@@ -165,6 +179,9 @@
           padding: 0 10px;
           font-size: 18px;
           color: $text-color;
+          &.error {
+            border: 1px solid $accent-color;
+          }
         }
       }
       .checkboxField {
@@ -174,6 +191,49 @@
         margin-top: 20px;
         label {
           color: $text-color;
+          position: relative;
+          padding-left: 35px;
+          .checkmark {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            border: 1px solid $dark-color;
+            width: 20px;
+            height: 20px;
+            &:after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 5px;
+              width: 5px;
+              height: 10px;
+              border: solid white;
+              border-width: 0 3px 3px 0;
+              -webkit-transform: rotate(45deg);
+              -ms-transform: rotate(45deg);
+              transform: rotate(45deg);
+              display: none;
+            }
+          }
+          input.checkbox {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            width: 20px;
+            height: 20px;
+            &:checked + .checkmark {
+              background-color: $dark-color;
+              &:after {
+                display: block;
+              }
+            }
+            &.error + .checkmark {
+              border-color: $accent-color;
+            }
+          }
+
         }
       }
       .textField {
@@ -191,6 +251,9 @@
           font-size: 18px;
           color: $text-color;
           resize: none;
+          &.error {
+            border: 1px solid $accent-color;
+          }
         }
 
       }
@@ -223,4 +286,6 @@
     margin-top: 6px;
     margin-bottom: 0;
   }
+
+
 </style>
