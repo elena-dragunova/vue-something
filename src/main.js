@@ -15,24 +15,11 @@ Vue.directive('truncate', function (el, binding) {
   el.innerHTML = truncated + "...";
 });
 
-export const greetings= {
-  created: function () {
-    this.hello()
-  },
-  methods: {
-    hello: function () {
-      console.log('привет из примеси!')
-    }
-  }
-};
-
-
 
 new Vue({
   el: '#app',
   render: h => h(App),
   router,
   store,
-  mixins: [greetings]
 });
 
