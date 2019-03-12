@@ -47,8 +47,10 @@
         ],
         selectedDepartment: null
       }
+    },
+    created() {
+      this.selectedDepartment = this.departments[0];
     }
-
   }
 </script>
 

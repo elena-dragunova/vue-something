@@ -54,8 +54,10 @@
         ],
         selectedLeader: null
       }
+    },
+    created() {
+      this.selectedLeader = this.leaders[0];
     }
-
   }
 </script>
 
