@@ -82,12 +82,11 @@
 
         <p
           :class="$style.error"
-          v-if="$v.contactsAgreement.$dirty && $v.contactsAgreement.$model === false"
+          v-if="$v.contactsAgreement.$dirty && !$v.contactsAgreement.agreed"
         >You should agree with something.</p>
       </div>
 
-      <!-- TODO Add a normal custom validator -->
-      <button :class="[$style.submitBtn, {[$style.errors]: $v.$invalid || this.contactsAgreement === false}]">Send</button>
+      <button :class="[$style.submitBtn, {[$style.errors]: $v.$invalid }]">Send</button>
 
     </form>
   </section>
@@ -121,8 +120,11 @@
           required
         },
         contactsAgreement: {
-          // TODO: create a custom validator
+          agreed: function (agreement) {
+            return agreement === true;
+          }
         }
+
       }
     }
 </script>
