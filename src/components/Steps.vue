@@ -29,12 +29,12 @@
           {
             id: 2,
             title: "Bun",
-            checked: false
+            checked: true
           },
           {
             id: 3,
             title: "Cheese",
-            checked: false
+            checked: true
           },
           {
             id: 4,
@@ -78,7 +78,8 @@
       display: flex;
       .step {
         background-color: #F0F0F0;
-        width: 14.5%;
+        width: 14.3%;
+        padding-left: 16px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -87,10 +88,10 @@
         &:before {
           content: '';
           position: absolute;
-          width: 26px;
+          width: 23px;
           height: 50%;
           top: 0;
-          left: calc(100% - 10px);
+          left: calc(100% - 16px);
           z-index: 10;
           background-color: #F0F0F0;
           box-shadow: 1px 0 0 0 #FFFFFF;
@@ -99,15 +100,18 @@
         &:after {
           content: '';
           position: absolute;
-          width: 26px;
+          width: 23px;
           height: 50%;
           top: auto;
           bottom: 0;
-          left: calc(100% - 10px);
+          left: calc(100% - 16px);
           z-index: 10;
           background-color: #F0F0F0;
           box-shadow: 1px 0 0 0 #FFFFFF;
           transform: skew(-30deg);
+        }
+        &:first-child {
+          padding-left: 0;
         }
         &:last-child:before,
         &:last-child:after {
@@ -142,19 +146,42 @@
         &.checked {
           background-color: #fff;
           cursor: pointer;
+          .stepCheckmark {
+            background-image: url("../assets/images/active.png");
+          }
           &:before,
           &:after {
             background-color: #fff;
             box-shadow: 1px 0 0 0 #E1E1E1;
           }
-          .stepCheckmark {
-            background-image: url("../assets/images/active.png");
+          &:hover,
+          &:focus {
+            background-color: #38AA3F;
+            &:before,
+            &:after {
+              background-color: #38AA3F;
+            }
+            .stepCheckmark {
+              background-image: url("../assets/images/hover.png");
+            }
           }
+          &:active {
+            background-color: #000;
+            &:before,
+            &:after {
+              background-color: #000;
+            }
+            .stepTitle {
+              color: #fff;
+            }
+          }
+
           .stepTitle {
             color: rgba(0,0,0,0.8);
 
           }
         }
+
       }
     }
   }
