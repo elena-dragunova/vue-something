@@ -83,6 +83,36 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          width: 26px;
+          height: 50%;
+          top: 0;
+          left: calc(100% - 10px);
+          z-index: 10;
+          background-color: #F0F0F0;
+          box-shadow: 1px 0 0 0 #FFFFFF;
+          transform: skew(30deg);
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          width: 26px;
+          height: 50%;
+          top: auto;
+          bottom: 0;
+          left: calc(100% - 10px);
+          z-index: 10;
+          background-color: #F0F0F0;
+          box-shadow: 1px 0 0 0 #FFFFFF;
+          transform: skew(-30deg);
+        }
+        &:last-child:before,
+        &:last-child:after {
+          content: none;
+        }
         .stepTitleContainer {
           display: flex;
           justify-content: center;
@@ -111,6 +141,12 @@
         }
         &.checked {
           background-color: #fff;
+          cursor: pointer;
+          &:before,
+          &:after {
+            background-color: #fff;
+            box-shadow: 1px 0 0 0 #E1E1E1;
+          }
           .stepCheckmark {
             background-image: url("../assets/images/active.png");
           }
