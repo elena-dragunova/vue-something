@@ -174,6 +174,9 @@
             .stepTitle {
               color: #fff;
             }
+            .stepCheckmark {
+              background-image: url("../assets/images/active.png");
+            }
           }
 
           .stepTitle {
