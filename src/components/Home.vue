@@ -1,13 +1,21 @@
 <template>
   <div :class="$style.homePage">
     <h1>Welcome!</h1>
+
+    <steps />
   </div>
 </template>
 
 <script>
-    export default {
-        name: "Home"
+
+  import Steps from "./Steps";
+
+  export default {
+    name: "Home",
+    components: {
+      Steps
     }
+  }
 </script>
 
 <style lang="scss" module>
