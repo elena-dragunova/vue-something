@@ -7,7 +7,13 @@
         :class="[$style.step, {[$style.checked] : step.checked === true}]"
       >
         <div :class="$style.stepTitleContainer">
-          <div :class="$style.stepCheckmark"></div>
+          <div :class="$style.stepCheckmark">
+            <svg
+              v-svg
+              symbol="checkmark-icon"
+              :class="$style.checkmarkIcon"
+            />
+          </div>
           <h4 :class="$style.stepTitle">{{ step.title }}</h4>
         </div>
       </li>
@@ -85,6 +91,7 @@
         align-items: center;
         text-align: center;
         position: relative;
+        transition: all 0.3s ease-in-out;
         &:before {
           content: '';
           position: absolute;
@@ -96,6 +103,7 @@
           background-color: #F0F0F0;
           box-shadow: 1px 0 0 0 #FFFFFF;
           transform: skew(30deg);
+          transition: all 0.3s ease-in-out;
         }
         &:after {
           content: '';
@@ -109,6 +117,7 @@
           background-color: #F0F0F0;
           box-shadow: 1px 0 0 0 #FFFFFF;
           transform: skew(-30deg);
+          transition: all 0.3s ease-in-out;
         }
         &:first-child {
           padding-left: 0;
@@ -126,11 +135,17 @@
             display: inline-block;
             width: 24px;
             height: 24px;
-            background-image: url("../assets/images/nonactive.png");
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
             margin-right: 8px;
+            background-color: #B3B3B3;
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: all 0.3s ease-in-out;
+            .checkmarkIcon {
+              width: 24px;
+              height: 24px;
+              fill: #F4F4F4;
+              transition: all 0.3s ease-in-out;
+            }
           }
           .stepTitle {
             color: rgba(39,39,39,0.3);
@@ -141,13 +156,15 @@
             text-transform: uppercase;
             display: block;
             max-width: calc(100% - 62px);
+            transition: all 0.3s ease-in-out;
           }
         }
         &.checked {
           background-color: #fff;
           cursor: pointer;
           .stepCheckmark {
-            background-image: url("../assets/images/active.png");
+            opacity: 1;
+            background-color: #38AA3F;
           }
           &:before,
           &:after {
@@ -162,7 +179,11 @@
               background-color: #38AA3F;
             }
             .stepCheckmark {
-              background-image: url("../assets/images/hover.png");
+              background-color: #d4d4d4;
+              opacity: 1;
+              .checkmarkIcon {
+                fill: #38AA3F;
+              }
             }
           }
           &:active {
@@ -175,7 +196,11 @@
               color: #fff;
             }
             .stepCheckmark {
-              background-image: url("../assets/images/active.png");
+              opacity: 1;
+              background-color: #38AA3F;
+              .checkmarkIcon {
+                fill: #F4F4F4;
+              }
             }
           }
 
