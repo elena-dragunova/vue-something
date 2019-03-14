@@ -17,6 +17,8 @@
       </keep-alive>
 
     </section>
+
+    <account-form />
   </div>
 </template>
 
@@ -24,6 +26,7 @@
     import greetings from '../listMixin';
     import Leaders from './Leaders';
     import Departments from './Departments';
+    import AccountForm from './AccountForm';
 
     export default {
       name: "About",
@@ -35,7 +38,8 @@
       },
       components: {
         Leaders,
-        Departments
+        Departments,
+        AccountForm
       },
       computed: {
         currentTabComponent() {
@@ -52,6 +56,9 @@
   .aboutPage{
     padding: 40px 0;
     @extend %container;
+    .companyStructure {
+      margin-bottom: 40px;
+    }
     h2 {
       font-size: 40px;
       text-align: center;
