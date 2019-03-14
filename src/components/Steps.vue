@@ -193,7 +193,7 @@
               background-color: #000;
             }
             .stepTitle {
-              color: #fff;
+              color: rgba(255,255,255,0.8);
             }
             .stepCheckmark {
               opacity: 1;
