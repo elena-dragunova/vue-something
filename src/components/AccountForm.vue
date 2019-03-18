@@ -79,6 +79,8 @@
       <button type="submit" :class="$style.submitBtn">Submit</button>
       <button :class="$style.linkBtn">Cancel</button>
     </form>
+
+
   </div>
 </template>
 

@@ -1,12 +1,20 @@
 <template>
   <div id="app" :class="$style.app">
-    <app-header />
-    <main :class="$style.main">
+    <v-app>
+      <v-content>
+        <app-header />
+        <main :class="$style.main">
 
-      <router-view />
+          <router-view />
 
-    </main>
-    <app-footer />
+        </main>
+
+      </v-content>
+      <v-footer>
+        <app-footer />
+      </v-footer>
+    </v-app>
+
 
   </div>
 </template>
@@ -32,6 +40,7 @@
 
 
 <style lang="scss" module>
+
   @import '../main.css';
   @import './assets/global';
 
